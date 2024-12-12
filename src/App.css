@@ -1,38 +1,186 @@
-.App {
-  text-align: center;
+body{
+  background-color: #1C1C1C !important;
+  color: white !important;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.nav-item{
+  color:white;
+  text-decoration: none;
+  margin-right: 20px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.banner{
+  display: flex;
+  align-items: center;
+  height: 600px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.banner::before{
+  position: absolute;
+  left:0;
+  width: 100%;
+  height: 600px;
+  content: '';
+  background: linear-gradient(to right, black, transparent);
+}
+
+.banner-info{
+  width: 40%;
+  margin-left: 30px;    
+  z-index: 1;
+}
+
+/* MovieCard */
+.movie-card{
+  width: 240px; /* 카드 넓이 */
+  height: 135px; /* 16:9 비율 */
+  margin-right: 15px; /* 카드 간 간격 */
+  border-radius: 5px; /* 모서리 둥글게 */
+  overflow: hidden; /* 카드 이미지 넘침 방지 */
+}
+
+.movie-card > a{
+  text-decoration: none;
+  color:white;
+}
+
+.overlay{
   display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  opacity: 0;
+  background: rgba(0, 0, 0, 0.8);
+  width: 100%;
+  height: 100%;
+}
+
+.movie-card:hover .overlay{
+  opacity: 1;
+}
+
+.overlay > h1{
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+}
+
+.overlay > .genre{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.carousel-item-padding {
+  padding: 10px;
+}
+
+.carousel-container {
+  padding-left: 35px; /* 왼쪽 간격 추가 */
+}
+
+.overlay > .info{
+  margin-left: 20px;
+  display: flex;
+  gap:10px;
+  /* font-weight: bold; */
+  font-size: 0.9em;
+}
+
+/* movie-details */
+.movie-details{
+  display: flex;
+  flex-direction: column;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  padding: 100px 0;
+  gap: 50px;
 }
 
-.App-link {
-  color: #61dafb;
+.movie-details img{
+  width: 600px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.movie-details .genre{
+  display: flex;
+  gap:20px;
+}
+
+.movie-details .genre + h1{
+  font-size: 4em;
+}
+
+.movie-details .genre > span{
+  /* width: 60px; */
+  height: 30px;
+  line-height: 20px;
+  font-size: 16px;
+} 
+
+.movie-details .info{
+  display: flex;
+  flex-direction: column;
+  gap:30px
+}
+
+.movie-details .info > h4 + div{
+  display: flex;
+  gap:20px;
+  font-size: 1.1em;
+  font-weight: bold;
+  padding-bottom: 20px;
+}
+
+.movie-details .overview{
+  padding-bottom: 20px;
+}
+
+
+/* Review-box */
+.review-box{
+  border: 3px solid white;
+  box-sizing: border-box;
+  padding: 30px;
+}
+
+.review-item{
+  border-bottom: 2px solid white;
+  box-sizing: border-box;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+/* Movies */
+
+.section-title {
+  padding-left: 50px; /* 제목 왼쪽 간격 */
+  margin-top: 25px; /* 제목과 슬라이더 간 간격 */
+  margin-bottom: 0px; /* 제목과 슬라이더 간 간격 */
+  font-size: 1.5rem; /* 제목 크기 조정 */
+  color: rgba(255, 255, 255, 0.663); /* 텍스트 색상 */
+}
+
+/* .movies-area h1{
+  margin: 15px 0;
+} */
+
+.movie-list{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.movie-list a{
+  text-decoration: none;
+  color:white;
+}
+
+
+@font-face {
+    font-family: 'HallymGothic-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2204@1.0/HallymGothic-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+body {
+    font-family: 'HallymGothic-Regular', sans-serif;
 }
