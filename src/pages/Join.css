@@ -24,3 +24,59 @@
     text-align: center;
   }
   
+  /* 폼 스타일 */
+  .join-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5px; 
+  }
+  
+  .form-group label {
+    font-size: 14px;
+    color: #d6d6d6;
+    margin-bottom: 5px;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 6px;
+    font-size: 13px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  
+  /* 에러 메시지 */
+  .error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: -10px;
+  }
+  
+  /* 버튼 스타일 */
+  .form-actions {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .join-button {
+    background-color: #5a200971; 
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+  }
+  
+  .join-button:hover {
+    background-color: #c04d1b4d;
+  }
+  
