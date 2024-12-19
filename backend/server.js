@@ -2,7 +2,6 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 const indexRoutes = require('./routes/index');
-const userRoutes = require('./routes/users');
 const authRoutes = require('./routes/auth');
 const favoriteRoutes = require('./routes/favorites');
 
@@ -19,7 +18,6 @@ app.use(express.static(path.join(__dirname,'..','frontend','build')));
 													
 // 루트 경로에 라우터 연결
 app.use('/', indexRoutes);
-app.use('/api/users', userRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/favorites', favoriteRoutes);
 

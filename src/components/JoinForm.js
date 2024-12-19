@@ -11,7 +11,6 @@ const JoinForm = ({ onSuccess }) => {
   });
 
   const [errors, setErrors] = useState({});
-  const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -38,11 +37,12 @@ const JoinForm = ({ onSuccess }) => {
     if (!validate()) return;
 
     try {
-      const res = await backendApi.post('/api/users/register', formData);
+      const res = await backendApi.post('/api/auth/register', formData);
       console.log('회원가입 성공:', res.data);
       if (onSuccess) onSuccess();
     } catch (error) {
       console.error('회원가입 오류:', error);
+      setErrors({ server: error.response?.data?.message || '회원가입에 실패했습니다.' });
     }
   };
 
@@ -73,13 +73,12 @@ const JoinForm = ({ onSuccess }) => {
       </div>
 
       <div>
-        <label>비밀번호</label>
+      <label>비밀번호</label>
         <input
-          type={showPassword ? 'text' : 'password'}
+          type="password"
           name="password"
           value={formData.password}
           onChange={handleChange}
-          placeholder="비밀번호를 입력하세요"
         />
         {errors.password && <p>{errors.password}</p>}
       </div>
@@ -87,11 +86,10 @@ const JoinForm = ({ onSuccess }) => {
       <div>
         <label>비밀번호 확인</label>
         <input
-          type={showPassword ? 'text' : 'password'}
+          type="password"
           name="confirmPassword"
           value={formData.confirmPassword}
           onChange={handleChange}
-          placeholder="비밀번호를 다시 입력하세요"
         />
         {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
       </div>
