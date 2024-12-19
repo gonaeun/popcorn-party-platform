@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';   // App.css 위쪽에 불러오기
 import './App.css';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 // import api from './api'  // axios 사용할거면, 우리가 만든 api로 불러오기
 import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
@@ -13,6 +13,22 @@ import Join from './pages/Join';
 
 function App() {
   const userId = 1; // 하드코딩된 사용자 ID (테스트용)
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태 관리
+
+  // 로그인 상태 초기화
+  useEffect(() => {
+    const token = localStorage.getItem('token'); // 로컬 스토리지에서 토큰 확인
+    if (token) {
+      setIsLoggedIn(true); // 토큰이 있으면 로그인 상태로 설정
+    }
+  }, []);
+
+  // 로그아웃 처리
+  const handleLogout = () => {
+    localStorage.removeItem('token'); // 로컬 스토리지에서 토큰 삭제
+    setIsLoggedIn(false); // 로그인 상태 초기화
+    alert('로그아웃 되었습니다.');
+  };
 
   // 통신 설명해주시느라 필기했던 부분~!
   // const getMovieData = async() =>{
@@ -35,7 +51,7 @@ function App() {
         <Route path='/' element={<Home/>}/>
         <Route path='/movies' element={<Movies/>}/>
         <Route path='/movies/:id' element={<MovieDetail/>}/>
-        <Route path='/login' element={<Login/>}/>
+        <Route path='/login' element={<Login setIsLoggedIn={setIsLoggedIn} />}/>
         <Route path='/join' element={<Join/>}/>
         <Route path="/favorite" element={<Favorite userId={userId} />} />
       </Routes>

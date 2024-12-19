@@ -38,7 +38,7 @@ const JoinForm = ({ onSuccess }) => {
     if (!validate()) return;
 
     try {
-      const res = await backendApi.post('/register', formData);
+      const res = await backendApi.post('/api/users/register', formData);
       console.log('회원가입 성공:', res.data);
       if (onSuccess) onSuccess();
     } catch (error) {
@@ -81,12 +81,6 @@ const JoinForm = ({ onSuccess }) => {
           onChange={handleChange}
           placeholder="비밀번호를 입력하세요"
         />
-        <button
-          type="button"
-          onClick={() => setShowPassword(!showPassword)}
-        >
-          {showPassword ? '숨기기' : '보기'}
-        </button>
         {errors.password && <p>{errors.password}</p>}
       </div>
 

@@ -7,13 +7,13 @@ import Navbar from 'react-bootstrap/Navbar';
 import '../App.css';
 import { Link } from 'react-router-dom';
 
-function Navibar() {
+function Navibar({ isLoggedIn, onLogout }) {
   return (
     <div>
       <Navbar expand="lg" variant="dark" className="custom-navbar">
         <Container fluid>
           {/* 로고 */}
-        <Navbar.Brand>
+          <Navbar.Brand>
             <Link to={"/"} style={{ textDecoration: "none" }}>
               <div style={{ display: "flex", alignItems: "center" }}>
                 <span style={{
@@ -30,7 +30,7 @@ function Navibar() {
             </Link>
           </Navbar.Brand>
 
-          {/* 메뉴 추가 */}
+          {/* 메뉴 */}
           <Navbar.Collapse id="navbarScroll">
             <Nav
               className="me-auto my-2 my-lg-0"
@@ -40,7 +40,20 @@ function Navibar() {
               <Nav.Link as={Link} to='/' className='nav-item2'>Home</Nav.Link>
               <Nav.Link as={Link} to='/movies' className='nav-item2'>Movies</Nav.Link>
               <Nav.Link as={Link} to='/favorite' className='nav-item2'>Favorite</Nav.Link>
-              <Nav.Link as={Link} to='/login' className='nav-item2'>Login</Nav.Link>
+              {/* 로그인/로그아웃 버튼 */}
+              {isLoggedIn ? (
+                <Nav.Link
+                  onClick={onLogout}
+                  className='nav-item2'
+                  style={{ cursor: "pointer", color: "rgb(255, 255, 255)" }}
+                >
+                  Logout
+                </Nav.Link>
+              ) : (
+                <Nav.Link as={Link} to='/login' className='nav-item2'>
+                  Login
+                </Nav.Link>
+              )}
             </Nav>
 
             {/* 검색 */}
