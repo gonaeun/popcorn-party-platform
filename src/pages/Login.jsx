@@ -1,33 +1,33 @@
 import React, { useState } from 'react';
-import { backendApi } from '../api'; // Axios 인스턴스를 불러옴
+import { backendApi } from '../api'; // Axios 인스턴스 사용
 
 const Login = () => {
   const [formData, setFormData] = useState({ username: '', password: '' });
   const [error, setError] = useState('');
 
-  // 입력값 변경 핸들러
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  // 폼 제출 핸들러
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(''); // 에러 메시지 초기화
+    setError('');
     try {
-      // 로그인 API 호출
-      const res = await backendApi.post('/auth/login', formData);
+      const res = await backendApi.post('/api/auth/login', formData);
       const { token } = res.data;
 
-      // 로그인 성공 처리
       alert('로그인 성공!');
-      localStorage.setItem('token', token); // JWT 토큰 저장
-      window.location.href = '/'; // 홈 화면으로 리다이렉트
+      localStorage.setItem('token', token);
+      window.location.href = '/'; // 홈으로 리다이렉트
     } catch (err) {
       console.error('로그인 실패:', err);
-      setError('아이디 또는 비밀번호가 잘못되었습니다.'); // 에러 메시지 표시
+      setError('아이디 또는 비밀번호가 잘못되었습니다.');
     }
+  };
+
+  const handleJoinClick = () => {
+    window.location.href = '/join'; // 회원가입 페이지로 이동
   };
 
   return (
@@ -55,7 +55,22 @@ const Login = () => {
           />
         </div>
         {error && <p style={{ color: 'red' }}>{error}</p>}
-        <button type="submit">로그인</button>
+        <div style={{ marginTop: '10px' }}>
+          <button type="submit">로그인</button>
+          <button
+            type="button"
+            style={{
+              marginLeft: '10px',
+              backgroundColor: '#f0f0f0',
+              border: '1px solid #ccc',
+              padding: '5px 10px',
+              cursor: 'pointer',
+            }}
+            onClick={handleJoinClick}
+          >
+            회원가입
+          </button>
+        </div>
       </form>
     </div>
   );
