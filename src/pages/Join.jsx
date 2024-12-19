@@ -1,5 +1,6 @@
 import React from 'react';
 import JoinForm from '../components/JoinForm';
+import './Join.css';
 
 const Join = () => {
   const handleSuccess = () => {
@@ -8,8 +9,8 @@ const Join = () => {
   };
 
   return (
-    <div>
-      <h1>회원가입</h1>
+    <div className="join-wrapper">
+      <h1 className="join-header">회원가입</h1>
       <JoinForm onSuccess={handleSuccess} />
     </div>
   );

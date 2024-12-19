@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { backendApi } from '../api'; // Axios 인스턴스 사용
+import './Login.css';
 
-const Login = ({ setIsLoggedIn }) => { // App.js에서 전달받는 setIsLoggedIn
+const Login = ({ setIsLoggedIn }) => {   // App.js에서 전달받는 setIsLoggedIn
   const [formData, setFormData] = useState({ username: '', password: '' });
   const [error, setError] = useState('');
 
@@ -32,41 +33,37 @@ const Login = ({ setIsLoggedIn }) => { // App.js에서 전달받는 setIsLoggedI
   };
 
   return (
-    <div>
-      <h1>로그인</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>아이디</label>
+    <div className="login-wrapper">
+      <h1 className="login-header">로그인</h1>
+      <form onSubmit={handleSubmit} className="login-form">
+        <div className="form-group">
+          <label htmlFor="username">아이디</label>
           <input
             type="text"
+            id="username"
             name="username"
             value={formData.username}
             onChange={handleChange}
             placeholder="아이디를 입력하세요"
           />
         </div>
-        <div>
-          <label>비밀번호</label>
+        <div className="form-group">
+          <label htmlFor="password">비밀번호</label>
           <input
             type="password"
+            id="password"
             name="password"
             value={formData.password}
             onChange={handleChange}
             placeholder="비밀번호를 입력하세요"
           />
         </div>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
-        <div style={{ marginTop: '10px' }}>
-          <button type="submit">로그인</button>
+        {error && <p className="error-message">{error}</p>}
+        <div className="form-actions">
+          <button type="submit" className="login-button">로그인</button>
           <button
             type="button"
-            style={{
-              marginLeft: '10px',
-              backgroundColor: '#f0f0f0',
-              border: '1px solid #ccc',
-              padding: '5px 10px',
-              cursor: 'pointer',
-            }}
+            className="register-button"
             onClick={handleJoinClick}
           >
             회원가입

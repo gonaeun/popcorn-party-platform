@@ -1,0 +1,88 @@
+/* Login 페이지 레이아웃 */
+.login-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    width: 80%;
+    max-width: 400px; /* 너비를 좁게 설정 */
+    background-color: rgba(137, 131, 131, 0.17); /* 투명한 배경 */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(245, 243, 243, 0.1);
+    overflow-y: auto;
+    max-height: 90%;
+  }
+  
+  /* 제목 스타일 */
+  .login-header {
+    font-family: 'Arial', sans-serif;
+    font-size: 25px;
+    font-weight: bold;
+    color: #d6d6d6;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  /* 폼 스타일 */
+  .login-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    font-size: 14px;
+    color: #d6d6d6;
+    margin-bottom: 5px;
+    display: block;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  
+  /* 에러 메시지 스타일 */
+  .error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+  
+  /* 버튼 스타일 */
+  .form-actions {
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+  }
+  
+  .login-button, .register-button {
+    background-color: #d5361a38;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+  }
+  
+  .login-button:hover, .register-button:hover {
+    background-color: #460a04;
+  }
+  
+  .login-button {
+    margin-left: auto; /* 로그인 버튼을 오른쪽으로 이동 */
+  }
+
+  .register-button {
+    margin-right: auto; /* 회원가입 버튼을 왼쪽으로 이동 */
+  }
