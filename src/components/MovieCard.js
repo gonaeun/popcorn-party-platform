@@ -5,14 +5,14 @@ import { useSelector } from 'react-redux';
 import axios from 'axios';
 
 const MovieCard = ({ data }) => {   // MovieSlide에서 data를 props로 받기
-
   const [isFavorite, setIsFavorite] = useState(false); // 하트 상태 관리
-  const genreList = useSelector(state => state.movie.genreList)
-  
+  const genreList = useSelector(state => state.movie.genreList);
+
   const handleFavoriteClick = async () => {
+    const roundedVoteAverage = Number(data.vote_average.toFixed(3)); // 소수점 3자리로 변환
     setIsFavorite(!isFavorite); // 하트 상태 토글
+
     if (!isFavorite) {
-      // 를 클릭하면 favorite 목록에 저장
       try {
         await axios.post('http://localhost:3001/api/favorites', {
           user_id: 1, // 로그인한 사용자 ID (예시)
@@ -22,6 +22,7 @@ const MovieCard = ({ data }) => {   // MovieSlide에서 data를 props로 받기
           release_date: data.release_date,
           overview: data.overview,
           poster_path: data.backdrop_path,
+          vote_average: roundedVoteAverage, // 변환된 값 사용
         });
         console.log('찜 목록에 추가됨');
       } catch (error) {
@@ -36,10 +37,9 @@ const MovieCard = ({ data }) => {   // MovieSlide에서 data를 props로 받기
     backgroundImage: `url(https://www.themoviedb.org/t/p/w500${data.backdrop_path})`,
     backgroundRepeat: 'no-repeat', // 모자이크 배열 사라짐
     backgroundSize: 'cover',
-    backgroundPosition: 'center'
+    backgroundPosition: 'center',
   };
-  
-  
+
   return (
     <div className="movie-card" style={div_styled}>
       <div

@@ -4,20 +4,44 @@ const router = express.Router();
 
 // 찜 목록 저장 (POST 요청)
 router.post('/', async (req, res) => {
-  const { user_id, movie_id, title, genre, release_date, overview, poster_path } = req.body;
+  const {
+    user_id,
+    movie_id,
+    title,
+    genre,
+    release_date,
+    overview,
+    poster_path,
+    vote_average
+  } = req.body;
 
   try {
     const query = `
-      INSERT INTO favorites (user_id, movie_id, title, genre, release_date, overview, poster_path)
-      VALUES (?, ?, ?, ?, ?, ?, ?)
+      INSERT INTO favorites (user_id, movie_id, title, genre, release_date, overview, poster_path, vote_average)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?)
       ON DUPLICATE KEY UPDATE
         title = VALUES(title),
         genre = VALUES(genre),
         release_date = VALUES(release_date),
         overview = VALUES(overview),
-        poster_path = VALUES(poster_path)
+        poster_path = VALUES(poster_path),
+        vote_average = VALUES(vote_average)
     `;
-    await pool.query(query, [user_id, movie_id, title, genre, release_date, overview, poster_path]);
+    // vote_average가 null일 가능성을 처리
+    const processedVoteAverage = vote_average !== undefined ? Number(vote_average) : null;
+    const values = [
+      user_id,
+      movie_id,
+      title,
+      genre,
+      release_date,
+      overview,
+      poster_path,
+      processedVoteAverage
+    ];
+
+    await pool.query(query, values);
+
     res.status(200).send({ message: '찜 목록에 추가되었습니다' });
   } catch (error) {
     console.error('찜 저장 실패:', error);
