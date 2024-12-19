@@ -9,7 +9,7 @@ router.post('/login', async (req, res) => {
   const { username, password } = req.body;
 
   try {
-    // db에서 사용자 정보 확인인
+    // db에서 사용자 정보 확인
     const query = 'SELECT * FROM users WHERE username = ?';
     const [rows] = await pool.query(query, [username]);
 
