@@ -184,3 +184,28 @@ body{
 body {
     font-family: 'HallymGothic-Regular', sans-serif;
 }
+
+/* 하트 아이콘 스타일 */
+.heart-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease, background-color 0.3s ease;
+}
+
+.movie-card:hover .heart-icon {
+  opacity: 1; /* Hover 시 하트 보이기 */
+}
+
+.heart-icon.active {
+  background-color: #ff007f; /* 하트를 클릭하면 핑크색으로 변경 */
+  opacity: 1;
+}

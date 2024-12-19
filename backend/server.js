@@ -1,4 +1,5 @@
 const express = require('express');
+const favoriteRouter = require('./routes/favorites');
 const cors = require('cors');
 const app = express();
 const indexRouter = require('./routes')
@@ -16,6 +17,7 @@ app.use(express.static(path.join(__dirname,'..','frontend','build')));
 													
 // 루트 경로에 라우터 연결
 app.use('/', indexRouter)
+app.use('/api', favoriteRouter);
 
 // 포트 설정
 app.set('port', process.env.PORT || 3001)

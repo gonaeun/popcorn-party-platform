@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const path = require('path')
-const db = require('../db'); 
+const pool = require('../db'); 
 const bcrypt = require('bcrypt');
 
 router.get('/', (req, res) => {
@@ -24,7 +24,7 @@ router.post('/register', async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // 데이터베이스에 회원 정보 삽입
-    const [result] = await db.query(
+    const [result] = await pool.query(
       'INSERT INTO users (username, nickname, password, phone_number) VALUES (?, ?, ?, ?)',
       [username, nickname, hashedPassword, phoneNumber]
     );
