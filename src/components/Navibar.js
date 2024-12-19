@@ -40,7 +40,6 @@ function Navibar() {
               <Nav.Link as={Link} to='/' className='nav-item2'>Home</Nav.Link>
               <Nav.Link as={Link} to='/movies' className='nav-item2'>Movies</Nav.Link>
               <Nav.Link as={Link} to='/favorite' className='nav-item2'>Favorite</Nav.Link>
-              <Nav.Link as={Link} to='/chat' className='nav-item2'>Chat</Nav.Link>
               <Nav.Link as={Link} to='/login' className='nav-item2'>Login</Nav.Link>
             </Nav>
 

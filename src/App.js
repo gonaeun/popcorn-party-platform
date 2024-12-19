@@ -9,7 +9,6 @@ import MovieDetail from './pages/MovieDetail';
 import Navibar from './components/Navibar';
 import Favorite from './pages/Favorite';
 import Login from './pages/Login';
-import ChatPage from './pages/ChatPage';
 
 function App() {
 
@@ -36,7 +35,6 @@ function App() {
         <Route path='/movies/:id' element={<MovieDetail/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/favorite' element={<Favorite/>}/>
-        <Route path='/chat' element={<ChatPage/>}/>
       </Routes>
     </div>
   );
