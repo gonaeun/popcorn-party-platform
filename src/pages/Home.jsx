@@ -1,5 +1,5 @@
 import React from 'react'
-import api from '../api' 
+import { tmdbApi, backendApi } from '../api';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { initData } from '../redux/reducers/movieSlice';
@@ -16,6 +16,7 @@ const Home = () => {
 
   const dispatch = useDispatch();  // store에서 변경사항 요청
 
+  // TMDB API 사용
   const fetchMovieData = async () => {
     // 3가지 정보를 동시에 받아와서 한번에 업데이트가 되도록 >> async~await 대신에 async~promise.all
 
@@ -25,10 +26,10 @@ const Home = () => {
     // const topRatedApi = await api.get('/movie/top_rated?language=ko-KR&page=1');
     // const upcomingApi = await api.get('/movie/upcoming?language=ko-KR&page=1');
 
-    const popularApi = api.get('/movie/popular?language=ko-KR&page=1'); 
-    const topRatedApi = api.get('/movie/top_rated?language=ko-KR&page=1');
-    const upcomingApi = api.get('/movie/upcoming?language=ko-KR&page=1');
-    const genreApi = api.get('/genre/movie/list?language=ko');
+    const popularApi = tmdbApi.get('/movie/popular?language=ko-KR&page=1'); 
+    const topRatedApi = tmdbApi.get('/movie/top_rated?language=ko-KR&page=1');
+    const upcomingApi = tmdbApi.get('/movie/upcoming?language=ko-KR&page=1');
+    const genreApi = tmdbApi.get('/genre/movie/list?language=ko');
 
     //Promise.all([]): 동시에 여러 개의 API호출을 해야 할 경우 사용
     // 하나라도 통신과정에서 오류가 발생하면 모든 요청이 reject(거절) 되는 방식
@@ -52,7 +53,11 @@ const Home = () => {
     }));
   };
 
-
+  // 백엔드 API 사용
+  const fetchFavorites = async () => {
+    const response = await backendApi.get('/favorites');
+    console.log('즐겨찾기 데이터:', response.data);
+  };
 
   useEffect(() => {
     fetchMovieData();

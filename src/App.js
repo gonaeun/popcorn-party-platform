@@ -9,6 +9,7 @@ import MovieDetail from './pages/MovieDetail';
 import Navibar from './components/Navibar';
 import Favorite from './pages/Favorite';
 import Login from './pages/Login';
+import Join from './pages/Join';
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
         <Route path='/movies' element={<Movies/>}/>
         <Route path='/movies/:id' element={<MovieDetail/>}/>
         <Route path='/login' element={<Login/>}/>
+        <Route path='/join' element={<Join/>}/>
         <Route path='/favorite' element={<Favorite/>}/>
       </Routes>
     </div>

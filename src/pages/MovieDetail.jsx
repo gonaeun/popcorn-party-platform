@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import api from '../api' 
+import { tmdbApi } from '../api';
 import Container from 'react-bootstrap/esm/Container'
 import Col from 'react-bootstrap/esm/Col'
 import Row from 'react-bootstrap/esm/Row'
@@ -16,7 +16,7 @@ const MovieDetail = () => {
   const [review, setReview] = useState([])
 
   const getMovieInfo = async () =>{
-    let res = await api.get(`/movie/${id}?language=ko-KR`)   //axios 객체를 api라는 이름으로 저장해뒀음
+    let res = await tmdbApi.get(`/movie/${id}?language=ko-KR`)   //axios 객체를 api라는 이름으로 저장해뒀음
 
     setMovieInfo(res.data)
   }
@@ -53,7 +53,7 @@ const MovieDetail = () => {
 
   const getReviews = async () => {
     try {
-      const res = await api.get(`/movie/${id}/reviews?language=en-US&page=1`);
+      const res = await tmdbApi.get(`/movie/${id}/reviews?language=en-US&page=1`);
       const translatedReviews = await Promise.all(
         res.data.results.map(async (item) => ({
           ...item,
