@@ -2,8 +2,8 @@ const express = require('express');
 const pool = require('../db');
 const router = express.Router();
 
-// 찜 목록 저장
-router.post('/favorites', async (req, res) => {
+// 찜 목록 저장 (POST 요청)
+router.post('/', async (req, res) => {
   const { user_id, movie_id, title, genre, release_date, overview, poster_path } = req.body;
 
   try {
@@ -25,7 +25,7 @@ router.post('/favorites', async (req, res) => {
   }
 });
 
-// 찜한 영화 목록 가져오기
+// 찜한 영화 목록 가져오기 (GET 요청)
 router.get('/:userId', async (req, res) => {
   const { userId } = req.params;
 

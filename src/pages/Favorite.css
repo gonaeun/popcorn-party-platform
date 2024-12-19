@@ -1,0 +1,69 @@
+body {
+    background-color: #1C1C1C !important;
+    color: white !important;
+  }
+  
+  .favorite-movie-list {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+  
+  .favorite-movie-card {
+    width: 240px; /* 카드 넓이 */
+    height: 135px; /* 16:9 비율 */
+    margin-right: 15px; /* 카드 간 간격 */
+    border-radius: 5px; /* 모서리 둥글게 */
+    overflow: hidden; /* 카드 이미지 넘침 방지 */
+    position: relative; /* 하트 아이콘을 위한 설정 */
+  }
+  
+  .favorite-movie-card > a {
+    text-decoration: none;
+    color: white;
+  }
+  
+  .favorite-movie-poster {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: all 0.3s ease;
+  }
+  
+  .favorite-movie-info {
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    font-size: 0.9rem;
+    line-height: 1.2;
+  }
+  
+  .favorite-movie-card:hover .favorite-movie-poster {
+    transform: scale(1.1); /* 확대 효과 */
+  }
+  
+  .favorite-heart-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease, background-color 0.3s ease;
+  }
+  
+  .favorite-movie-card:hover .favorite-heart-icon {
+    opacity: 1;
+  }
+  
+  .favorite-heart-icon.active {
+    background-color: #ff007f; /* 클릭 시 핑크색 */
+    opacity: 1;
+  }
+  
