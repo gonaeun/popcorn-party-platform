@@ -26,7 +26,7 @@ function App() {
   // 로그아웃 처리
   const handleLogout = () => {
     localStorage.removeItem('token'); // 로컬 스토리지에서 토큰 삭제
-    setIsLoggedIn(false); // 로그인 상태 초기화
+    setIsLoggedIn(false); // 로그아웃으로 상태 변경
     alert('로그아웃 되었습니다.');
   };
 
@@ -46,7 +46,7 @@ function App() {
 
   return (
     <div>
-      <Navibar/>
+      <Navibar isLoggedIn={isLoggedIn} onLogout={handleLogout} />
       <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/movies' element={<Movies/>}/>
