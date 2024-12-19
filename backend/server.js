@@ -1,8 +1,10 @@
 const express = require('express');
-const favoriteRouter = require('./routes/favorites');
 const cors = require('cors');
 const app = express();
-const indexRouter = require('./routes')
+const indexRoutes = require('./routes/index');
+const userRoutes = require('./routes/users');
+const authRoutes = require('./routes/auth');
+const favoriteRoutes = require('./routes/favorites');
 
 // CORS 미들웨어 적용 (모든 라우터 전에 추가)
 app.use(cors());
@@ -16,8 +18,10 @@ const path = require('path')
 app.use(express.static(path.join(__dirname,'..','frontend','build')));
 													
 // 루트 경로에 라우터 연결
-app.use('/', indexRouter)
-app.use('/api', favoriteRouter);
+app.use('/', indexRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/favorites', favoriteRoutes);
 
 // 포트 설정
 app.set('port', process.env.PORT || 3001)

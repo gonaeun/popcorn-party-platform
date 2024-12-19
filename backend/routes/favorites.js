@@ -1,5 +1,5 @@
 const express = require('express');
-const pool = require('../db'); // MySQL 연결
+const pool = require('../db');
 const router = express.Router();
 
 // 찜 목록 저장
@@ -22,6 +22,20 @@ router.post('/favorites', async (req, res) => {
   } catch (error) {
     console.error('찜 저장 실패:', error);
     res.status(500).send({ error: '찜 저장 실패' });
+  }
+});
+
+// 찜한 영화 목록 가져오기
+router.get('/:userId', async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    const query = 'SELECT * FROM favorites WHERE user_id = ?';
+    const [rows] = await pool.query(query, [userId]);
+    res.status(200).json(rows);
+  } catch (error) {
+    console.error('찜한 영화 목록 가져오기 실패:', error);
+    res.status(500).send({ error: '찜한 영화 목록을 가져오는 데 실패했습니다.' });
   }
 });
 

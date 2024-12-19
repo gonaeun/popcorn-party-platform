@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';   // App.css 위쪽에 불러오기
 import './App.css';
 import { useEffect } from 'react';
-import api from './api'  // axios 사용할거면, 우리가 만든 api로 불러오기
+// import api from './api'  // axios 사용할거면, 우리가 만든 api로 불러오기
 import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import Movies from './pages/Movies';
@@ -12,6 +12,7 @@ import Login from './pages/Login';
 import Join from './pages/Join';
 
 function App() {
+  const userId = 1; // 하드코딩된 사용자 ID (테스트용)
 
   // 통신 설명해주시느라 필기했던 부분~!
   // const getMovieData = async() =>{
@@ -36,7 +37,7 @@ function App() {
         <Route path='/movies/:id' element={<MovieDetail/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/join' element={<Join/>}/>
-        <Route path='/favorite' element={<Favorite/>}/>
+        <Route path="/favorite" element={<Favorite userId={userId} />} />
       </Routes>
     </div>
   );
