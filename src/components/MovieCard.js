@@ -9,7 +9,7 @@ const MovieCard = ({ data }) => {   // MovieSlide에서 data를 props로 받기
   const genreList = useSelector(state => state.movie.genreList);
 
   const handleFavoriteClick = async () => {
-    const roundedVoteAverage = Number(data.vote_average.toFixed(3)); // 소수점 3자리로 변환
+    const roundedVoteAverage = Number(data.vote_average.toFixed(2)); // 소수점 3자리로 변환
     setIsFavorite(!isFavorite); // 하트 상태 토글
 
     if (!isFavorite) {

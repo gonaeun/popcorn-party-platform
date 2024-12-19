@@ -1,5 +1,5 @@
 const express = require('express');
-const pool = require('../db');
+const pool = require('../db'); // 데이터베이스 연결
 const router = express.Router();
 
 // 찜 목록 저장 (POST 요청)
@@ -12,7 +12,7 @@ router.post('/', async (req, res) => {
     release_date,
     overview,
     poster_path,
-    vote_average
+    vote_average,
   } = req.body;
 
   try {
@@ -27,7 +27,6 @@ router.post('/', async (req, res) => {
         poster_path = VALUES(poster_path),
         vote_average = VALUES(vote_average)
     `;
-    // vote_average가 null일 가능성을 처리
     const processedVoteAverage = vote_average !== undefined ? Number(vote_average) : null;
     const values = [
       user_id,
@@ -37,25 +36,30 @@ router.post('/', async (req, res) => {
       release_date,
       overview,
       poster_path,
-      processedVoteAverage
+      processedVoteAverage,
     ];
 
     await pool.query(query, values);
 
-    res.status(200).send({ message: '찜 목록에 추가되었습니다' });
+    res.status(200).send({ message: '찜 목록에 추가되었습니다.' });
   } catch (error) {
     console.error('찜 저장 실패:', error);
-    res.status(500).send({ error: '찜 저장 실패' });
+    res.status(500).send({ error: '찜 저장에 실패했습니다.' });
   }
 });
 
-// 찜한 영화 목록 가져오기 (GET 요청)
+// 특정 유저의 찜한 영화 목록 가져오기 (GET 요청)
 router.get('/:userId', async (req, res) => {
   const { userId } = req.params;
 
   try {
     const query = 'SELECT * FROM favorites WHERE user_id = ?';
     const [rows] = await pool.query(query, [userId]);
+
+    if (rows.length === 0) {
+      return res.status(404).send({ message: '찜한 영화 목록이 없습니다.' });
+    }
+
     res.status(200).json(rows);
   } catch (error) {
     console.error('찜한 영화 목록 가져오기 실패:', error);
