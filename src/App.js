@@ -10,24 +10,38 @@ import Navibar from './components/Navibar';
 import Favorite from './pages/Favorite';
 import Login from './pages/Login';
 import Join from './pages/Join';
+import { getCurrentUserId, isLoggedIn } from './utils/auth';
 
 function App() {
-  const userId = 1; // 하드코딩된 사용자 ID (테스트용)
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태 관리
+  const [userId, setUserId] = useState(null); // 동적 사용자 ID
+  const [isLoggedInState, setIsLoggedInState] = useState(false); // 로그인 상태 관리
 
-  // 로그인 상태 초기화
+  // 로그인 상태 및 사용자 ID 초기화
   useEffect(() => {
-    const token = localStorage.getItem('token'); // 로컬 스토리지에서 토큰 확인
-    if (token) {
-      setIsLoggedIn(true); // 토큰이 있으면 로그인 상태로 설정
-    }
+    const checkAuthStatus = () => {
+      const loggedIn = isLoggedIn();
+      const currentUserId = getCurrentUserId();
+      
+      setIsLoggedInState(loggedIn);
+      setUserId(currentUserId);
+    };
+
+    checkAuthStatus();
   }, []);
 
   // 로그아웃 처리
   const handleLogout = () => {
     localStorage.removeItem('token'); // 로컬 스토리지에서 토큰 삭제
-    setIsLoggedIn(false); // 로그아웃으로 상태 변경
+    setIsLoggedInState(false); // 로그아웃으로 상태 변경
+    setUserId(null); // 사용자 ID 초기화
     alert('로그아웃 되었습니다.');
+  };
+
+  // 로그인 성공 시 상태 업데이트
+  const handleLoginSuccess = () => {
+    const currentUserId = getCurrentUserId();
+    setUserId(currentUserId);
+    setIsLoggedInState(true);
   };
 
   // 통신 설명해주시느라 필기했던 부분~!
@@ -46,14 +60,14 @@ function App() {
 
   return (
     <div>
-      <Navibar isLoggedIn={isLoggedIn} onLogout={handleLogout} />
+      <Navibar isLoggedIn={isLoggedInState} onLogout={handleLogout} />
       <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/movies' element={<Movies/>}/>
         <Route path='/movies/:id' element={<MovieDetail/>}/>
-        <Route path='/login' element={<Login setIsLoggedIn={setIsLoggedIn} />}/>
+        <Route path='/login' element={<Login onLoginSuccess={handleLoginSuccess} />}/>
         <Route path='/join' element={<Join/>}/>
-        <Route path="/favorite" element={<Favorite userId={userId} />} />
+        <Route path="/favorite" element={<Favorite userId={userId} isLoggedIn={isLoggedInState} />} />
       </Routes>
     </div>
   );

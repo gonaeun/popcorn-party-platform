@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { backendApi } from '../api'; // Axios 인스턴스 사용
 import './Login.css';
 
-const Login = ({ setIsLoggedIn }) => {   // App.js에서 전달받는 setIsLoggedIn
+const Login = ({ onLoginSuccess }) => {   // App.js에서 전달받는 onLoginSuccess 콜백
   const [formData, setFormData] = useState({ username: '', password: '' });
   const [error, setError] = useState('');
 
@@ -20,7 +20,7 @@ const Login = ({ setIsLoggedIn }) => {   // App.js에서 전달받는 setIsLogge
 
       alert('로그인 성공!');
       localStorage.setItem('token', token); // 토큰을 로컬 스토리지에 저장
-      setIsLoggedIn(true); // 로그인 상태 업데이트
+      onLoginSuccess(); // 로그인 성공 콜백 호출
       window.location.href = '/'; // 홈 화면으로 리다이렉트
     } catch (err) {
       console.error('로그인 실패:', err);
